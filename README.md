@@ -1,1 +1,1 @@
-# another-snake
+# program-snake
