@@ -32,15 +32,15 @@ var drawModule = (function () {
         // Using a for loop we push the 5 elements inside the array(squares).
         // Every element will have x = 0 and the y will take the value of the index.
         for (var i = length; i>=0; i--) {
-            snake.push({x:i, y:0});
+            snake.push({x:(i+1), y:1});
         }  
     }
 	
 	var createFood = function() {
-          food = {
-            //Generate random numbers.
-            x: Math.floor((Math.random() * 30) + 1),
-            y: Math.floor((Math.random() * 30) + 1)
+        food = {
+			//Generate random numbers.
+			x: Math.floor((Math.random() * 30) + 1),
+			y: Math.floor((Math.random() * 30) + 1)
         }
         
         //Look at the position of the snake's body.
@@ -88,7 +88,8 @@ var drawModule = (function () {
 		Therefore if x or y of an element of the snake, don't fit inside the canvas, the game will be stopped.
 		If the check_collision is true, it means the the snake has crashed on its body itself, then the game will be stopped again. 
 		*/
-		if (snakeX == -1 || snakeX == w / snakeSize || snakeY == -1 || snakeY == h / snakeSize || checkCollision(snakeX, snakeY, snake)) {
+		if ((snakeX == -1 || snakeX == w / snakeSize || snakeY == -1 || snakeY == h / snakeSize
+			|| checkCollision(snakeX, snakeY, snake)) && direction != "null") {
 			//Stop the game.
 			
 			var event = new CustomEvent("gameover", {
@@ -112,13 +113,22 @@ var drawModule = (function () {
 			createFood();
 		}
 	
-		//Pop out the last cell.
-		var tail = snake.pop();
-		tail.x = snakeX;
-		tail.y = snakeY;
-	
-		//Puts the tail as the first cell.
-		snake.unshift(tail);
+		if (direction != "null")
+		{
+			//Pop out the last cell.
+			var tail = snake.pop();
+			tail.x = snakeX;
+			tail.y = snakeY;
+		
+			//Puts the tail as the first cell.
+			snake.unshift(tail);
+			
+			direction = "null";
+		}
+		else 
+		{
+			console.log(direction);
+		}
 	
 		//For each element of the array create a square using the bodySnake function we created before.
 		for (var i = 0; i < snake.length; i++) {

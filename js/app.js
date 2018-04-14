@@ -1,6 +1,4 @@
-
 document.onkeydown = function (event) {
-	num_direction = directions.indexOf(direction);
 	var size = directions.length;
 	
 	keyCode = window.event.keyCode;
@@ -20,15 +18,26 @@ document.onkeydown = function (event) {
 			break;
 	
 		case 38:
+			direction = directions[num_direction];
 			console.log(direction);
 			break;
+		
+		default:
+			direction = "null";
+			break;
 	}
+}
+
+function reset()
+{
+	direction = "down";
+	num_direction = 2;
 }
 
 btn.onclick = function()
 {
 	start.style.display = "none";
-	
+	reset();
 	drawModule.init();
 }
 

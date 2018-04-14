@@ -8,7 +8,7 @@ var score = 0;
 var snake;
 var snakeSize = 10;
 var food;
-var direction = "down";
 
+var direction = "down";
 var directions = ["up","right","down","left"];
 var num_direction = 2;
