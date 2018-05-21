@@ -86,6 +86,7 @@ function* changeDirection(inText){
 			direction = directions[num_direction];
 			isMoving = true;
 		}
+		document.getElementById('direction').textContent = direction;
 		yield direction;
 	}
 }
